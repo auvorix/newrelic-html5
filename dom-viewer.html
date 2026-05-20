@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM Viewer — Orbit Tech Solutions</title>
+  <script type="module" src="/src/index.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0b0f1a; color: #e2e8f0; }
+
+    header { background: #0d1321; border-bottom: 1px solid #1e2a3a; padding: 0 64px; height: 68px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+    .logo { font-size: 19px; font-weight: 700; color: #fff; letter-spacing: -0.5px; }
+    .logo span { color: #6366f1; }
+    nav a { color: #94a3b8; text-decoration: none; margin-left: 32px; font-size: 14px; transition: color .2s; }
+    nav a:hover, nav a[aria-current="page"] { color: #fff; }
+    .nav-cta { background: #6366f1; color: #fff !important; padding: 8px 20px; border-radius: 6px; }
+    .nav-cta:hover { background: #4f46e5 !important; }
+    .nav-dev { color: #818cf8 !important; border: 1px solid #3730a333; padding: 5px 12px; border-radius: 6px; font-size: 12px !important; }
+    .nav-dev:hover { border-color: #6366f1; color: #a5b4fc !important; }
+    .nav-dev[aria-current="page"] { border-color: #6366f1; color: #a5b4fc !important; }
+
+    .page-hero { padding: 60px 64px 40px; border-bottom: 1px solid #1e2a3a; }
+    .page-hero h1 { font-size: 36px; font-weight: 800; letter-spacing: -1px; margin-bottom: 10px; }
+    .page-hero p { font-size: 15px; color: #64748b; }
+
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 40px 64px; display: grid; grid-template-columns: 280px 1fr; gap: 32px; align-items: start; }
+
+    /* Sidebar */
+    .info-box { background: #0d1321; border-left: 3px solid #6366f1; padding: 14px 16px; margin-bottom: 16px; font-size: 13px; color: #64748b; line-height: 1.7; border-radius: 0 6px 6px 0; }
+    .info-box strong { color: #e2e8f0; }
+
+    .legend { background: #0d1321; border: 1px solid #1e2a3a; padding: 20px; border-radius: 8px; }
+    .legend h2 { font-size: 13px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px; }
+    .legend-item { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; font-size: 12px; color: #64748b; }
+    .legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+
+    /* Controls */
+    .controls { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+    .ctrl-btn { background: #1e2a3a; color: #94a3b8; border: 1px solid #2e3d50; padding: 7px 16px; font-size: 12px; cursor: pointer; border-radius: 6px; transition: all .15s; }
+    .ctrl-btn:hover { background: #6366f1; color: #fff; border-color: #6366f1; }
+
+    /* DOM Tree panel */
+    .tree-panel { background: #0d1321; border: 1px solid #1e2a3a; padding: 24px; border-radius: 8px; overflow-x: auto; }
+    .tree-panel h2 { font-size: 14px; color: #64748b; margin-bottom: 20px; font-weight: 400; }
+
+    .dom-tree { font-family: 'Courier New', Courier, monospace; font-size: 12px; line-height: 1.9; }
+    details { margin-left: 20px; }
+    details > summary { cursor: pointer; list-style: none; outline: none; padding: 1px 6px; border-radius: 4px; }
+    details > summary::-webkit-details-marker { display: none; }
+    details > summary:hover { background: #1e2a3a; }
+    details[open] > summary .close-tag { display: none; }
+
+    .tag-bracket { color: #475569; }
+    .tag-name { color: #f472b6; font-weight: bold; }
+    .attr-key { color: #60a5fa; }
+    .attr-val { color: #34d399; }
+    .text-node { color: #a78bfa; font-style: italic; }
+    .comment-node { color: #475569; font-style: italic; }
+    .children { margin-left: 20px; border-left: 1px dashed #1e2a3a; padding-left: 4px; }
+    .close-tag-line { margin-left: 20px; }
+    .self-closing { color: #f472b6; }
+    .node-count { background: #1e1b4b; color: #818cf8; font-size: 10px; padding: 1px 6px; border-radius: 10px; vertical-align: middle; margin-left: 6px; }
+
+    footer { background: #070b12; border-top: 1px solid #1e2a3a; color: #475569; padding: 28px 64px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; margin-top: 40px; }
+    footer .footer-logo { color: #fff; font-size: 15px; font-weight: 700; }
+    footer .footer-logo span { color: #6366f1; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">Orbit<span>.</span>Tech</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="dom-viewer.html" class="nav-dev" aria-current="page">DOM</a>
+      <a href="console-lab.html" class="nav-dev">Console Lab</a>
+      <a href="contact.html" class="nav-cta">Get a Quote</a>
+    </nav>
+  </header>
+
+  <div class="page-hero">
+    <h1>DOM Viewer</h1>
+    <p>Live tree of the Document Object Model — generated in real time by the browser.</p>
+  </div>
+
+  <div class="wrap">
+
+    <aside>
+      <div class="info-box">
+        <strong>What is the DOM?</strong><br>
+        The browser reads your HTML file and builds this tree of objects in memory. JavaScript interacts with these objects — not the original HTML file.
+      </div>
+
+      <div class="legend">
+        <h2>Legend</h2>
+        <div class="legend-item"><div class="legend-dot" style="background:#f472b6"></div> Element node — HTML tag</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#60a5fa"></div> Attribute name</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#34d399"></div> Attribute value</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#a78bfa"></div> Text node</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#475569"></div> Comment node</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#818cf8"></div> Child counter</div>
+      </div>
+
+      <div class="info-box" style="margin-top:16px">
+        <strong>Controls:</strong><br>
+        Click any row to expand/collapse it.<br><br>
+        Open <strong>DevTools → Elements</strong> to compare with the browser's own inspector.
+      </div>
+    </aside>
+
+    <div>
+      <div class="controls">
+        <button class="ctrl-btn" onclick="document.querySelectorAll('details').forEach(d=>d.open=true)">Expand All</button>
+        <button class="ctrl-btn" onclick="document.querySelectorAll('details').forEach(d=>d.open=false)">Collapse All</button>
+        <button class="ctrl-btn" onclick="location.reload()">Refresh Tree</button>
+      </div>
+      <div class="tree-panel">
+        <h2>document → <span style="color:#f472b6;font-family:monospace">&lt;html&gt;</span></h2>
+        <div class="dom-tree" id="tree-root"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-logo">Orbit<span>.</span>Tech</div>
+    <div>DOM rendered live by the browser &nbsp;|&nbsp; Open DevTools → Elements to inspect</div>
+    <div>&copy; 2026 Orbit Tech Solutions Ltd.</div>
+  </footer>
+
+  <script>
+    const SKIP_TAGS = new Set(['SCRIPT', 'STYLE'])
+
+    function attrs(el) {
+      return Array.from(el.attributes).map(a => {
+        const val = a.value.length > 40 ? a.value.substring(0, 40) + '…' : a.value
+        return ` <span class="attr-key">${a.name}</span><span class="tag-bracket">=</span><span class="attr-val">"${val}"</span>`
+      }).join('')
+    }
+
+    function childCount(el) {
+      const count = Array.from(el.childNodes).filter(n => {
+        if (n.nodeType === 3) return n.textContent.trim().length > 0
+        return n.nodeType === 1 || n.nodeType === 8
+      }).length
+      return count > 0 ? `<span class="node-count">${count}</span>` : ''
+    }
+
+    function renderNode(node) {
+      if (node.nodeType === 8) {
+        const txt = node.textContent.trim().substring(0, 60)
+        return `<div class="comment-node">&lt;!-- ${txt} --&gt;</div>`
+      }
+
+      if (node.nodeType === 3) {
+        const txt = node.textContent.trim()
+        if (!txt) return ''
+        const display = txt.length > 80 ? txt.substring(0, 80) + '…' : txt
+        return `<div class="text-node">"${display}"</div>`
+      }
+
+      if (node.nodeType !== 1) return ''
+
+      const tag = node.tagName.toLowerCase()
+      const attrsHtml = attrs(node)
+      const openTag = `<span class="tag-bracket">&lt;</span><span class="tag-name">${tag}</span>${attrsHtml}<span class="tag-bracket">&gt;</span>`
+      const closeTag = `<span class="tag-bracket">&lt;/</span><span class="tag-name">${tag}</span><span class="tag-bracket">&gt;</span>`
+
+      if (SKIP_TAGS.has(node.tagName)) {
+        return `<div><span class="self-closing">${openTag}</span> <em style="color:#334155;font-family:sans-serif;font-size:11px">[contents hidden]</em> ${closeTag}</div>`
+      }
+
+      const childNodes = Array.from(node.childNodes)
+      const renderedChildren = childNodes.map(renderNode).filter(Boolean).join('')
+
+      if (!renderedChildren) {
+        return `<div>${openTag}${closeTag}</div>`
+      }
+
+      return `
+        <details open>
+          <summary>${openTag}${childCount(node)}</summary>
+          <div class="children">${renderedChildren}</div>
+          <div class="close-tag-line">${closeTag}</div>
+        </details>`
+    }
+
+    document.getElementById('tree-root').innerHTML = renderNode(document.documentElement)
+
+    const allDetails = document.querySelectorAll('#tree-root details')
+    allDetails.forEach((d, i) => { d.open = i < 4 })
+  </script>
+
+</body>
+</html>
