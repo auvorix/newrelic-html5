@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NR Test HTML5 — About</title>
+
+  <!-- =====================================================
+       NEW RELIC SNIPPET — paste your snippet here
+  ====================================================== -->
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; color: #222; }
+    header { background: #0d1b2a; color: #fff; padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; }
+    header h1 { font-size: 22px; letter-spacing: 1px; }
+    header span { font-size: 12px; background: #1b4332; color: #52b788; padding: 4px 10px; border-radius: 20px; }
+    nav { background: #1b263b; padding: 0 40px; display: flex; gap: 4px; }
+    nav a { color: #adb5bd; text-decoration: none; padding: 14px 18px; font-size: 14px; display: block; }
+    nav a:hover, nav a[aria-current="page"] { color: #52b788; border-bottom: 2px solid #52b788; }
+    main { max-width: 860px; margin: 40px auto; padding: 0 20px; }
+    section { margin-bottom: 32px; }
+    section h2 { font-size: 26px; margin-bottom: 12px; color: #0d1b2a; }
+    section p { line-height: 1.8; color: #555; margin-bottom: 10px; }
+    article { background: #fff; border-radius: 8px; padding: 24px; margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+    article h3 { font-size: 17px; margin-bottom: 10px; color: #1b263b; }
+    article p { font-size: 14px; color: #666; line-height: 1.7; }
+    footer { background: #0d1b2a; color: #6c757d; text-align: center; padding: 24px; margin-top: 60px; font-size: 13px; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>NR Test — HTML5</h1>
+    <span>New Relic Test</span>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html" aria-current="page">About</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <main>
+    <section>
+      <h2>About</h2>
+      <p>This page exists to verify that New Relic correctly tracks navigation between pages on a static HTML5 site hosted on Azure Static Web Apps.</p>
+    </section>
+
+    <section>
+      <article>
+        <h3>About this project</h3>
+        <p>A minimal static HTML5 site with three pages. Deployed automatically on every push to the main branch via GitHub Actions → Azure Static Web Apps.</p>
+      </article>
+
+      <article>
+        <h3>Technology stack</h3>
+        <p>HTML5 semantic markup + CSS — no JavaScript framework, no build step. New Relic is injected via the copy/paste script snippet placed in the <code>&lt;head&gt;</code> of every page.</p>
+      </article>
+
+      <article>
+        <h3>Why semantic HTML5?</h3>
+        <p>Semantic tags like <code>&lt;main&gt;</code>, <code>&lt;article&gt;</code>, and <code>&lt;nav&gt;</code> describe the purpose of content to browsers, search engines, and screen readers — making the page more accessible and SEO-friendly.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 NR Test HTML5 — New Relic monitoring test site</p>
+  </footer>
+
+</body>
+</html>
