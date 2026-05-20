@@ -26,35 +26,32 @@
 
     .wrap { max-width: 1200px; margin: 0 auto; padding: 40px 64px; display: grid; grid-template-columns: 260px 1fr; gap: 32px; align-items: start; }
 
-    /* Sidebar */
     .sidebar { position: sticky; top: 88px; }
     .info-box { background: #0d1321; border-left: 3px solid #6366f1; padding: 14px 16px; margin-bottom: 16px; font-size: 13px; color: #64748b; line-height: 1.7; border-radius: 0 6px 6px 0; }
     .info-box strong { color: #e2e8f0; }
+    .info-box code { background: #1e2a3a; padding: 1px 5px; font-size: 11px; border-radius: 3px; color: #a5b4fc; }
 
     .legend { background: #0d1321; border: 1px solid #1e2a3a; padding: 20px; border-radius: 8px; }
     .legend h2 { font-size: 13px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px; }
     .leg-row { display: flex; align-items: center; gap: 10px; margin-bottom: 9px; font-size: 12px; color: #64748b; }
     .leg-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
 
-    /* Section blocks */
     .section-block { background: #0d1321; border: 1px solid #1e2a3a; border-radius: 8px; padding: 24px; margin-bottom: 20px; }
-    .section-block h2 { font-size: 14px; font-weight: 600; color: #e2e8f0; margin-bottom: 6px; }
-    .section-block p { font-size: 12px; color: #475569; margin-bottom: 16px; }
+    .section-block h2 { font-size: 14px; font-weight: 600; color: #e2e8f0; margin-bottom: 4px; }
+    .section-block .sub { font-size: 12px; color: #475569; margin-bottom: 16px; font-style: italic; }
 
     .btn-grid { display: flex; flex-wrap: wrap; gap: 8px; }
-
     .http-btn {
-      border: 1px solid transparent; padding: 7px 16px; font-size: 12px;
-      cursor: pointer; border-radius: 6px; font-weight: 600; letter-spacing: 0.3px;
-      transition: all .15s; background: transparent;
+      border: 1px solid transparent; padding: 8px 14px; font-size: 12px;
+      cursor: pointer; border-radius: 6px; font-weight: 600;
+      transition: all .15s; background: transparent; text-align: left; line-height: 1.4;
     }
+    .http-btn small { display: block; font-weight: 400; font-size: 10px; opacity: .6; margin-top: 2px; font-family: 'Courier New', monospace; }
     .http-btn:hover { transform: translateY(-1px); }
     .http-btn:active { transform: scale(.97); }
 
     .btn-2xx { color: #4ade80; border-color: #166534; }
     .btn-2xx:hover { background: #14532d; }
-    .btn-3xx { color: #60a5fa; border-color: #1e3a5f; }
-    .btn-3xx:hover { background: #1e3a5f; }
     .btn-4xx { color: #fbbf24; border-color: #713f12; }
     .btn-4xx:hover { background: #451a03; }
     .btn-5xx { color: #f87171; border-color: #7f1d1d; }
@@ -62,23 +59,18 @@
     .btn-js  { color: #c084fc; border-color: #3b0764; }
     .btn-js:hover { background: #2e1065; }
 
-    /* Live log */
     .log-panel { background: #070b12; border: 1px solid #1e2a3a; border-radius: 8px; padding: 20px; }
     .log-panel h2 { font-size: 13px; color: #818cf8; margin-bottom: 14px; font-family: 'Courier New', monospace; letter-spacing: 1px; }
     .log-controls { display: flex; gap: 8px; margin-bottom: 14px; }
     .log-ctrl { background: transparent; border: 1px solid #1e2a3a; color: #475569; padding: 5px 14px; font-size: 12px; cursor: pointer; border-radius: 6px; transition: all .15s; }
     .log-ctrl:hover { border-color: #6366f1; color: #818cf8; }
-
-    #live-log { height: 260px; overflow-y: auto; font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.8; }
-    .log-entry { padding: 2px 0; border-bottom: 1px solid #0d1321; display: flex; gap: 12px; }
-    .log-time { color: #334155; flex-shrink: 0; }
-    .log-badge { font-size: 10px; padding: 1px 6px; border-radius: 10px; flex-shrink: 0; margin-top: 3px; }
-    .badge-ok    { background: #14532d; color: #4ade80; }
-    .badge-redir { background: #1e3a5f; color: #60a5fa; }
-    .badge-warn  { background: #451a03; color: #fbbf24; }
-    .badge-error { background: #450a0a; color: #f87171; }
-    .badge-js    { background: #2e1065; color: #c084fc; }
-    .log-msg { color: #94a3b8; word-break: break-word; }
+    #live-log { height: 280px; overflow-y: auto; font-family: 'Courier New', monospace; font-size: 11.5px; line-height: 1.8; }
+    .log-entry { padding: 1px 0; border-bottom: 1px solid #0d1321; }
+    .log-ok    { color: #4ade80; }
+    .log-warn  { color: #fbbf24; }
+    .log-error { color: #f87171; }
+    .log-info  { color: #818cf8; }
+    .log-dim   { color: #334155; }
 
     footer { background: #070b12; border-top: 1px solid #1e2a3a; color: #475569; padding: 28px 64px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; margin-top: 40px; }
     footer .footer-logo { color: #fff; font-size: 15px; font-weight: 700; }
@@ -101,117 +93,91 @@
 
   <div class="page-hero">
     <h1>Console Lab</h1>
-    <p>Trigger real HTTP status codes and JavaScript errors — observe them in the browser console and in the log below.</p>
+    <p>Each button simulates a real user action — observe raw production-style output in DevTools Console and Network.</p>
   </div>
 
   <div class="wrap">
 
     <aside class="sidebar">
       <div class="info-box">
-        <strong>How to use:</strong><br>
-        Open <strong>DevTools → Console</strong> (F12), then click any button. Each request or error appears both here and in the console.
+        <strong>Setup:</strong><br>
+        Open <strong>DevTools</strong> (F12) → <strong>Console</strong> tab. Click any button. The page shows a summary — the full context object is only visible in DevTools.
+      </div>
+      <div class="info-box">
+        <strong>Network tab:</strong><br>
+        Filter by <code>Fetch/XHR</code>. You will see each API call with its real HTTP status, response headers, and timing.
       </div>
       <div class="legend">
-        <h2>Status ranges</h2>
-        <div class="leg-row"><div class="leg-dot" style="background:#4ade80"></div> 2xx — Success</div>
-        <div class="leg-row"><div class="leg-dot" style="background:#60a5fa"></div> 3xx — Redirection</div>
-        <div class="leg-row"><div class="leg-dot" style="background:#fbbf24"></div> 4xx — Client Error</div>
-        <div class="leg-row"><div class="leg-dot" style="background:#f87171"></div> 5xx — Server Error</div>
-        <div class="leg-row"><div class="leg-dot" style="background:#c084fc"></div> JS — Runtime Error</div>
-      </div>
-      <div class="info-box" style="margin-top:16px">
-        <strong>Tip:</strong><br>
-        In the Console tab, use the filter buttons to show only <em>Errors</em> or <em>Warnings</em>. The Network tab shows every fetch with full response headers.
+        <h2>Sections</h2>
+        <div class="leg-row"><div class="leg-dot" style="background:#4ade80"></div> Happy path — user succeeds</div>
+        <div class="leg-row"><div class="leg-dot" style="background:#fbbf24"></div> Client error — user caused it</div>
+        <div class="leg-row"><div class="leg-dot" style="background:#f87171"></div> Server error — backend failed</div>
+        <div class="leg-row"><div class="leg-dot" style="background:#c084fc"></div> JS runtime crash — code bug</div>
       </div>
     </aside>
 
     <div>
 
-      <!-- 2xx -->
       <div class="section-block">
-        <h2>2xx — Success</h2>
-        <p>Request received, understood and accepted.</p>
+        <h2>Happy path — request succeeds</h2>
+        <div class="sub">User performs an action and the server responds correctly.</div>
         <div class="btn-grid">
-          <button class="http-btn btn-2xx" onclick="doFetch(200)">200 OK</button>
-          <button class="http-btn btn-2xx" onclick="doFetch(201)">201 Created</button>
-          <button class="http-btn btn-2xx" onclick="doFetch(202)">202 Accepted</button>
-          <button class="http-btn btn-2xx" onclick="doFetch(204)">204 No Content</button>
-          <button class="http-btn btn-2xx" onclick="doFetch(206)">206 Partial Content</button>
-          <button class="http-btn btn-2xx" onclick="doFetch(207)">207 Multi-Status</button>
+          <button class="http-btn btn-2xx" onclick="scenario_createProject()">Create new project<small>POST /api/v1/projects → 201</small></button>
+          <button class="http-btn btn-2xx" onclick="scenario_listPipelines()">Load CI/CD pipelines<small>GET /api/v1/pipelines → 200</small></button>
+          <button class="http-btn btn-2xx" onclick="scenario_getMetrics()">Fetch service metrics<small>GET /api/v1/metrics/services → 200</small></button>
+          <button class="http-btn btn-2xx" onclick="scenario_downloadLogs()">Download log archive<small>GET /api/v1/logs/2025-11.tar.gz → 206</small></button>
+          <button class="http-btn btn-2xx" onclick="scenario_deleteWebhook()">Delete stale webhook<small>DELETE /api/v1/webhooks/wh_9182 → 204</small></button>
         </div>
       </div>
 
-      <!-- 3xx -->
       <div class="section-block">
-        <h2>3xx — Redirection</h2>
-        <p>Further action is required to complete the request.</p>
+        <h2>Client errors — user or token caused it</h2>
+        <div class="sub">4xx range. The server understood the request but refused or could not fulfil it.</div>
         <div class="btn-grid">
-          <button class="http-btn btn-3xx" onclick="doFetch(301)">301 Moved Permanently</button>
-          <button class="http-btn btn-3xx" onclick="doFetch(302)">302 Found</button>
-          <button class="http-btn btn-3xx" onclick="doFetch(304)">304 Not Modified</button>
-          <button class="http-btn btn-3xx" onclick="doFetch(307)">307 Temporary Redirect</button>
-          <button class="http-btn btn-3xx" onclick="doFetch(308)">308 Permanent Redirect</button>
+          <button class="http-btn btn-4xx" onclick="scenario_badDeployConfig()">Deploy with invalid config<small>POST /api/v1/deployments → 422 Unprocessable</small></button>
+          <button class="http-btn btn-4xx" onclick="scenario_tokenExpired()">Access workspace (token expired)<small>GET /api/v1/workspaces/me → 401 Unauthorized</small></button>
+          <button class="http-btn btn-4xx" onclick="scenario_forbiddenEnv()">Access production env<small>GET /api/v1/environments/prod/secrets → 403 Forbidden</small></button>
+          <button class="http-btn btn-4xx" onclick="scenario_deletedPipeline()">Load removed pipeline<small>GET /api/v1/pipelines/pl_2289-archived → 404 Not Found</small></button>
+          <button class="http-btn btn-4xx" onclick="scenario_concurrentDeploy()">Trigger duplicate deploy<small>POST /api/v1/deployments → 409 Conflict</small></button>
+          <button class="http-btn btn-4xx" onclick="scenario_rateLimited()">Hammer build endpoint<small>POST /api/v1/builds → 429 Too Many Requests</small></button>
+          <button class="http-btn btn-4xx" onclick="scenario_badFilter()">Query with invalid filter<small>GET /api/v1/logs?level=VERBOSE&from=yesterday → 400</small></button>
         </div>
       </div>
 
-      <!-- 4xx -->
       <div class="section-block">
-        <h2>4xx — Client Error</h2>
-        <p>The request contains bad syntax or cannot be fulfilled.</p>
+        <h2>Server errors — backend failed</h2>
+        <div class="sub">5xx range. The user did nothing wrong — the server crashed or is unreachable.</div>
         <div class="btn-grid">
-          <button class="http-btn btn-4xx" onclick="doFetch(400)">400 Bad Request</button>
-          <button class="http-btn btn-4xx" onclick="doFetch(401)">401 Unauthorized</button>
-          <button class="http-btn btn-4xx" onclick="doFetch(403)">403 Forbidden</button>
-          <button class="http-btn btn-4xx" onclick="doFetch(404)">404 Not Found</button>
-          <button class="http-btn btn-4xx" onclick="doFetch(405)">405 Method Not Allowed</button>
-          <button class="http-btn btn-4xx" onclick="doFetch(408)">408 Request Timeout</button>
-          <button class="http-btn btn-4xx" onclick="doFetch(409)">409 Conflict</button>
-          <button class="http-btn btn-4xx" onclick="doFetch(410)">410 Gone</button>
-          <button class="http-btn btn-4xx" onclick="doFetch(422)">422 Unprocessable Entity</button>
-          <button class="http-btn btn-4xx" onclick="doFetch(429)">429 Too Many Requests</button>
+          <button class="http-btn btn-5xx" onclick="scenario_buildCrash()">Trigger build runner<small>POST /api/v1/builds → 500 Internal Server Error</small></button>
+          <button class="http-btn btn-5xx" onclick="scenario_registryDown()">Push to container registry<small>POST /api/v1/registry/push → 502 Bad Gateway</small></button>
+          <button class="http-btn btn-5xx" onclick="scenario_k8sDown()">Scale deployment<small>POST /api/v1/deployments/scale → 503 Service Unavailable</small></button>
+          <button class="http-btn btn-5xx" onclick="scenario_cloudTimeout()">Sync cloud provider<small>GET /api/v1/cloud/aws/resources → 504 Gateway Timeout</small></button>
+          <button class="http-btn btn-5xx" onclick="scenario_artifactStorage()">Upload build artifact<small>POST /api/v1/artifacts/upload → 507 Insufficient Storage</small></button>
         </div>
       </div>
 
-      <!-- 5xx -->
       <div class="section-block">
-        <h2>5xx — Server Error</h2>
-        <p>The server failed to fulfil an apparently valid request.</p>
+        <h2>JavaScript runtime crashes</h2>
+        <div class="sub">No network request. The JS engine throws. These appear in New Relic as JS errors with stack traces.</div>
         <div class="btn-grid">
-          <button class="http-btn btn-5xx" onclick="doFetch(500)">500 Internal Server Error</button>
-          <button class="http-btn btn-5xx" onclick="doFetch(501)">501 Not Implemented</button>
-          <button class="http-btn btn-5xx" onclick="doFetch(502)">502 Bad Gateway</button>
-          <button class="http-btn btn-5xx" onclick="doFetch(503)">503 Service Unavailable</button>
-          <button class="http-btn btn-5xx" onclick="doFetch(504)">504 Gateway Timeout</button>
-          <button class="http-btn btn-5xx" onclick="doFetch(507)">507 Insufficient Storage</button>
+          <button class="http-btn btn-js" onclick="crash_renderMetricsDashboard()">Render metrics dashboard<small>TypeError — API returned null, chart reads .series</small></button>
+          <button class="http-btn btn-js" onclick="crash_loadSdkModule()">Load telemetry SDK<small>ReferenceError — OpenTelemetrySDK not initialised</small></button>
+          <button class="http-btn btn-js" onclick="crash_dependencyResolver()">Resolve dependency graph<small>RangeError — circular dependency, stack overflow</small></button>
+          <button class="http-btn btn-js" onclick="crash_asyncPipelineTrigger()">Trigger async pipeline<small>Unhandled Promise rejection — runner pool exhausted</small></button>
+          <button class="http-btn btn-js" onclick="crash_websocketReconnect()">WebSocket reconnect fires<small>Uncaught error in background timer</small></button>
+          <button class="http-btn btn-js" onclick="crash_parseWebhookPayload()">Parse incoming webhook<small>SyntaxError — payload is not valid JSON</small></button>
+          <button class="http-btn btn-js" onclick="crash_deprecatedApi()">Call deprecated SDK method<small>console.warn — migrate to v2 SDK</small></button>
+          <button class="http-btn btn-js" onclick="crash_serviceHealthTable()">Log service health audit<small>console.table — tabular performance data</small></button>
         </div>
       </div>
 
-      <!-- JS Errors -->
-      <div class="section-block">
-        <h2>JavaScript Errors</h2>
-        <p>Runtime errors thrown directly in JavaScript — no network request involved.</p>
-        <div class="btn-grid">
-          <button class="http-btn btn-js" onclick="triggerTypeError()">TypeError</button>
-          <button class="http-btn btn-js" onclick="triggerReferenceError()">ReferenceError</button>
-          <button class="http-btn btn-js" onclick="triggerRangeError()">RangeError</button>
-          <button class="http-btn btn-js" onclick="triggerSyntaxError()">SyntaxError (eval)</button>
-          <button class="http-btn btn-js" onclick="triggerPromiseRejection()">Promise Rejection</button>
-          <button class="http-btn btn-js" onclick="triggerCustomError()">Custom Error</button>
-          <button class="http-btn btn-js" onclick="triggerConsoleError()">console.error</button>
-          <button class="http-btn btn-js" onclick="triggerConsoleWarn()">console.warn</button>
-          <button class="http-btn btn-js" onclick="triggerConsoleTable()">console.table</button>
-        </div>
-      </div>
-
-      <!-- Live log -->
       <div class="log-panel">
-        <h2>▶ LIVE LOG</h2>
+        <h2>▶ ACTIVITY LOG (summary — open DevTools for full context)</h2>
         <div class="log-controls">
           <button class="log-ctrl" onclick="clearLog()">Clear</button>
-          <button class="log-ctrl" onclick="document.getElementById('live-log').scrollTop=0">Top</button>
-          <button class="log-ctrl" onclick="document.getElementById('live-log').scrollTop=99999">Bottom</button>
+          <button class="log-ctrl" onclick="document.getElementById('live-log').scrollTop=99999">Latest</button>
         </div>
-        <div id="live-log"><div style="color:#334155;font-family:'Courier New',monospace;font-size:12px">— click a button above to generate a log entry —</div></div>
+        <div id="live-log"><div class="log-dim">waiting for user action…</div></div>
       </div>
 
     </div>
@@ -219,150 +185,367 @@
 
   <footer>
     <div class="footer-logo">Orbit<span>.</span>Tech</div>
-    <div>Open DevTools → Console to inspect in real time</div>
+    <div>DevTools Console + Network tab show full production-level output</div>
     <div>&copy; 2026 Orbit Tech Solutions Ltd.</div>
   </footer>
 
   <script>
-    const HTTP_LABELS = {
-      200:'OK', 201:'Created', 202:'Accepted', 204:'No Content', 206:'Partial Content', 207:'Multi-Status',
-      301:'Moved Permanently', 302:'Found', 304:'Not Modified', 307:'Temporary Redirect', 308:'Permanent Redirect',
-      400:'Bad Request', 401:'Unauthorized', 403:'Forbidden', 404:'Not Found', 405:'Method Not Allowed',
-      408:'Request Timeout', 409:'Conflict', 410:'Gone', 422:'Unprocessable Entity', 429:'Too Many Requests',
-      500:'Internal Server Error', 501:'Not Implemented', 502:'Bad Gateway',
-      503:'Service Unavailable', 504:'Gateway Timeout', 507:'Insufficient Storage'
+    // ── Runtime session context ──────────────────────────────────────────────
+    const _session = {
+      userId:      'usr_' + Math.floor(10000 + Math.random() * 90000),
+      sessionId:   'sess_' + Math.random().toString(36).substr(2, 16),
+      workspaceId: 'ws_'  + Math.floor(100 + Math.random() * 900),
+      orgId:       'org_' + Math.floor(1000 + Math.random() * 9000),
     }
 
-    function ts() {
-      const d = new Date()
-      return d.toTimeString().split(' ')[0] + '.' + String(d.getMilliseconds()).padStart(3,'0')
-    }
+    function _reqId() { return 'req_' + Math.random().toString(36).substr(2, 12) }
+    function _now()   { return new Date().toISOString() }
 
-    function addLog(badge, badgeClass, msg) {
-      const log = document.getElementById('live-log')
-      const placeholder = log.querySelector('div[style]')
-      if (placeholder) placeholder.remove()
-      const entry = document.createElement('div')
-      entry.className = 'log-entry'
-      entry.innerHTML = `<span class="log-time">${ts()}</span><span class="log-badge ${badgeClass}">${badge}</span><span class="log-msg">${msg}</span>`
-      log.appendChild(entry)
-      log.scrollTop = log.scrollHeight
+    // ── Page log (summary only) ──────────────────────────────────────────────
+    function log(cls, text) {
+      const el = document.getElementById('live-log')
+      const ph = el.querySelector('.log-dim')
+      if (ph) ph.remove()
+      const d = document.createElement('div')
+      d.className = 'log-entry ' + cls
+      d.textContent = new Date().toTimeString().split(' ')[0] + '  ' + text
+      el.appendChild(d)
+      el.scrollTop = el.scrollHeight
     }
-
     function clearLog() {
-      document.getElementById('live-log').innerHTML = '<div style="color:#334155;font-family:\'Courier New\',monospace;font-size:12px">— cleared —</div>'
+      document.getElementById('live-log').innerHTML = '<div class="log-dim">cleared</div>'
     }
 
-    async function doFetch(code) {
-      const label = HTTP_LABELS[code] || ''
-      const url = `https://httpstat.us/${code}`
+    // ── Core API call helper ─────────────────────────────────────────────────
+    async function _apiCall(method, endpoint, statusCode) {
+      const requestId = _reqId()
+      const t0 = performance.now()
 
-      addLog(`${code}`, getBadgeClass(code), `Fetching ${url} …`)
-      console.groupCollapsed(`[Console Lab] HTTP ${code} ${label}`)
-      console.log('URL:', url)
-      console.log('Timestamp:', new Date().toISOString())
-
-      try {
-        const res = await fetch(url, { mode: 'cors' })
-        const text = await res.text().catch(() => '(no body)')
-        const msg = `HTTP ${res.status} ${res.statusText || label} — ${text.trim().substring(0,120)}`
-
-        if (res.ok) {
-          console.log('%c✓ ' + msg, 'color:#4ade80')
-          addLog(`${code}`, 'badge-ok', msg)
-        } else if (res.status < 400) {
-          console.info('%c↪ ' + msg, 'color:#60a5fa')
-          addLog(`${code}`, 'badge-redir', msg)
-        } else if (res.status < 500) {
-          console.warn('%c⚠ ' + msg, 'color:#fbbf24')
-          addLog(`${code}`, 'badge-warn', msg)
-        } else {
-          console.error('%c✖ ' + msg, 'color:#f87171')
-          addLog(`${code}`, 'badge-error', msg)
-        }
-      } catch (err) {
-        const msg = `Network error — ${err.message}`
-        console.error('%c✖ ' + msg, 'color:#f87171')
-        addLog('ERR', 'badge-error', msg)
-      }
-
-      console.groupEnd()
-    }
-
-    function getBadgeClass(code) {
-      if (code < 300) return 'badge-ok'
-      if (code < 400) return 'badge-redir'
-      if (code < 500) return 'badge-warn'
-      return 'badge-error'
-    }
-
-    function triggerTypeError() {
-      const msg = 'TypeError: Cannot read properties of null (reading "value")'
-      addLog('TypeError', 'badge-js', msg)
-      try { null.value } catch(e) { console.error('[Console Lab]', e) }
-    }
-
-    function triggerReferenceError() {
-      const msg = 'ReferenceError: undeclaredVariable is not defined'
-      addLog('ReferenceError', 'badge-js', msg)
-      try { console.log(undeclaredVariable) } catch(e) { console.error('[Console Lab]', e) }
-    }
-
-    function triggerRangeError() {
-      const msg = 'RangeError: Maximum call stack size exceeded'
-      addLog('RangeError', 'badge-js', msg)
-      try {
-        function overflow() { return overflow() }
-        overflow()
-      } catch(e) { console.error('[Console Lab]', e) }
-    }
-
-    function triggerSyntaxError() {
-      const msg = 'SyntaxError via eval: unexpected token'
-      addLog('SyntaxError', 'badge-js', msg)
-      try { eval('const x = {') } catch(e) { console.error('[Console Lab]', e) }
-    }
-
-    function triggerPromiseRejection() {
-      const msg = 'Promise Rejection — simulated async failure after 200ms'
-      addLog('Promise Rejection', 'badge-js', msg)
-      const p = new Promise((_, reject) => {
-        setTimeout(() => reject(new Error('Simulated async failure after 200ms')), 200)
+      console.log('[orbit-api] outgoing request', {
+        method, endpoint, requestId,
+        userId:      _session.userId,
+        sessionId:   _session.sessionId,
+        workspaceId: _session.workspaceId,
+        orgId:       _session.orgId,
+        timestamp:   _now(),
       })
-      p.catch(e => console.error('[Console Lab] Promise rejected:', e))
-    }
 
-    function triggerCustomError() {
-      class ApiError extends Error {
-        constructor(msg, code) { super(msg); this.name = 'ApiError'; this.code = code }
+      let res
+      try {
+        res = await fetch(`https://httpstat.us/${statusCode}`, { mode: 'cors' })
+      } catch (networkErr) {
+        const duration = Math.round(performance.now() - t0)
+        console.error('[orbit-api] network failure', {
+          method, endpoint, requestId,
+          duration: duration + 'ms',
+          error: networkErr.message,
+          userId: _session.userId,
+          timestamp: _now(),
+        })
+        log('log-error', `NETWORK ERR  ${method} ${endpoint}`)
+        return null
       }
-      const e = new ApiError('Resource not accessible with current token', 'AUTH_403')
-      addLog('CustomError', 'badge-js', `${e.name}: ${e.message} (code: ${e.code})`)
-      console.error('[Console Lab]', e)
+
+      const duration = Math.round(performance.now() - t0)
+      const status = res.status
+
+      if (status >= 500) {
+        console.error('[orbit-api] server error', {
+          method, endpoint, requestId, status,
+          duration:    duration + 'ms',
+          userId:      _session.userId,
+          workspaceId: _session.workspaceId,
+          orgId:       _session.orgId,
+          timestamp:   _now(),
+        })
+        log('log-error', `${status}  ${method} ${endpoint}  (${duration}ms)`)
+
+      } else if (status === 429) {
+        console.warn('[orbit-api] rate limited — back off and retry', {
+          method, endpoint, requestId, status,
+          retryAfter:  res.headers.get('retry-after') || '30',
+          userId:      _session.userId,
+          workspaceId: _session.workspaceId,
+          timestamp:   _now(),
+        })
+        log('log-warn', `${status}  ${method} ${endpoint}  rate limited`)
+
+      } else if (status === 401) {
+        console.warn('[orbit-api] authentication required — token may be expired', {
+          method, endpoint, requestId, status,
+          sessionId:   _session.sessionId,
+          userId:      _session.userId,
+          workspaceId: _session.workspaceId,
+          timestamp:   _now(),
+        })
+        log('log-warn', `${status}  ${method} ${endpoint}  token expired`)
+
+      } else if (status === 403) {
+        console.warn('[orbit-api] insufficient permissions', {
+          method, endpoint, requestId, status,
+          userId:      _session.userId,
+          orgId:       _session.orgId,
+          workspaceId: _session.workspaceId,
+          timestamp:   _now(),
+        })
+        log('log-warn', `${status}  ${method} ${endpoint}  access denied`)
+
+      } else if (status >= 400) {
+        console.warn('[orbit-api] client error', {
+          method, endpoint, requestId, status,
+          duration:  duration + 'ms',
+          userId:    _session.userId,
+          timestamp: _now(),
+        })
+        log('log-warn', `${status}  ${method} ${endpoint}  (${duration}ms)`)
+
+      } else {
+        console.log('[orbit-api] response OK', {
+          method, endpoint, requestId, status,
+          duration:  duration + 'ms',
+          userId:    _session.userId,
+          timestamp: _now(),
+        })
+        log('log-ok', `${status}  ${method} ${endpoint}  (${duration}ms)`)
+      }
+
+      return res
     }
 
-    function triggerConsoleError() {
-      const msg = 'console.error: Simulated application error — payments service unreachable'
-      addLog('console.error', 'badge-error', msg)
-      console.error('[Console Lab]', msg)
+    // ── Happy path scenarios ─────────────────────────────────────────────────
+    function scenario_createProject()  { _apiCall('POST',   '/api/v1/projects', 201) }
+    function scenario_listPipelines()  { _apiCall('GET',    '/api/v1/pipelines', 200) }
+    function scenario_getMetrics()     { _apiCall('GET',    '/api/v1/metrics/services', 200) }
+    function scenario_downloadLogs()   { _apiCall('GET',    '/api/v1/logs/2025-11.tar.gz', 206) }
+    function scenario_deleteWebhook()  { _apiCall('DELETE', '/api/v1/webhooks/wh_9182', 204) }
+
+    // ── Client error scenarios ───────────────────────────────────────────────
+    function scenario_badDeployConfig() {
+      console.warn('[orbit-deployments] deploy config validation failed', {
+        component:    'DeploymentForm',
+        invalidFields: { replicas: 'must be a positive integer', image: 'tag missing' },
+        userId:    _session.userId,
+        timestamp: _now(),
+      })
+      _apiCall('POST', '/api/v1/deployments', 422)
     }
 
-    function triggerConsoleWarn() {
-      const msg = 'console.warn: Deprecated API endpoint /api/v1/users — migrate to /api/v2/users'
-      addLog('console.warn', 'badge-warn', msg)
-      console.warn('[Console Lab]', msg)
+    function scenario_tokenExpired() {
+      console.warn('[orbit-auth] access token expired — silent refresh failed', {
+        sessionId:   _session.sessionId,
+        userId:      _session.userId,
+        workspaceId: _session.workspaceId,
+        expiredAt:   new Date(Date.now() - 7200000).toISOString(),
+        timestamp:   _now(),
+      })
+      _apiCall('GET', '/api/v1/workspaces/me', 401)
     }
 
-    function triggerConsoleTable() {
+    function scenario_forbiddenEnv() {
+      console.warn('[orbit-rbac] permission denied — user lacks prod:secrets:read', {
+        userId:      _session.userId,
+        orgId:       _session.orgId,
+        requiredRole: 'prod:secrets:read',
+        userRoles:   ['dev:read', 'staging:deploy'],
+        timestamp:   _now(),
+      })
+      _apiCall('GET', '/api/v1/environments/prod/secrets', 403)
+    }
+
+    function scenario_deletedPipeline() {
+      console.warn('[orbit-pipelines] pipeline not found — may have been deleted or renamed', {
+        pipelineId: 'pl_2289-archived',
+        userId:     _session.userId,
+        timestamp:  _now(),
+      })
+      _apiCall('GET', '/api/v1/pipelines/pl_2289-archived', 404)
+    }
+
+    function scenario_concurrentDeploy() {
+      console.warn('[orbit-deployments] concurrent deploy in progress', {
+        component:         'DeploymentController',
+        activeDeploymentId: 'dpl_' + Math.floor(10000 + Math.random() * 90000),
+        userId:     _session.userId,
+        timestamp:  _now(),
+      })
+      _apiCall('POST', '/api/v1/deployments', 409)
+    }
+
+    function scenario_rateLimited() {
+      console.warn('[orbit-api] rate limit reached on build endpoint', {
+        endpoint:        'POST /api/v1/builds',
+        buildsInWindow:  15,
+        windowMs:        60000,
+        userId:          _session.userId,
+        workspaceId:     _session.workspaceId,
+        timestamp:       _now(),
+      })
+      _apiCall('POST', '/api/v1/builds', 429)
+    }
+
+    function scenario_badFilter() {
+      console.warn('[orbit-logs] invalid query parameters rejected', {
+        invalidParams: { level: 'VERBOSE', from: 'yesterday' },
+        userId:    _session.userId,
+        timestamp: _now(),
+      })
+      _apiCall('GET', '/api/v1/logs?level=VERBOSE&from=yesterday', 400)
+    }
+
+    // ── Server error scenarios ───────────────────────────────────────────────
+    function scenario_buildCrash()     { _apiCall('POST', '/api/v1/builds', 500) }
+    function scenario_registryDown()   { _apiCall('POST', '/api/v1/registry/push', 502) }
+    function scenario_k8sDown()        { _apiCall('POST', '/api/v1/deployments/scale', 503) }
+    function scenario_cloudTimeout()   { _apiCall('GET',  '/api/v1/cloud/aws/resources', 504) }
+    function scenario_artifactStorage(){ _apiCall('POST', '/api/v1/artifacts/upload', 507) }
+
+    // ── JavaScript runtime crashes ───────────────────────────────────────────
+
+    function crash_renderMetricsDashboard() {
+      function buildTimeSeries(apiResponse) {
+        return apiResponse.data.series.map(s => ({ name: s.name, points: s.datapoints }))
+      }
+      function renderMetricsDashboard(container, apiResponse) {
+        const series = buildTimeSeries(apiResponse)
+        container.innerHTML = '<canvas id="metrics-chart"></canvas>'
+      }
+      try {
+        renderMetricsDashboard(document.createElement('div'), null)
+      } catch (e) {
+        console.error('[orbit-dashboard] failed to render metrics — API response was null', e, {
+          component:   'MetricsDashboard',
+          userId:      _session.userId,
+          workspaceId: _session.workspaceId,
+          timestamp:   _now(),
+        })
+        log('log-error', 'JS TypeError — renderMetricsDashboard: cannot read null.data.series')
+      }
+    }
+
+    function crash_loadSdkModule() {
+      function initTelemetry(workspaceId) {
+        return OpenTelemetrySDK.init({ workspaceId, endpoint: '/ingest/otlp' })
+      }
+      try {
+        initTelemetry(_session.workspaceId)
+      } catch (e) {
+        console.error('[orbit-telemetry] SDK initialisation failed — module not loaded', e, {
+          component:   'TelemetryBootstrap.initTelemetry',
+          userId:      _session.userId,
+          workspaceId: _session.workspaceId,
+          timestamp:   _now(),
+        })
+        log('log-error', 'JS ReferenceError — OpenTelemetrySDK is not defined')
+      }
+    }
+
+    function crash_dependencyResolver() {
+      function resolveDependency(packageName, visited) {
+        return resolveDependency(packageName, visited.concat(packageName))
+      }
+      try {
+        resolveDependency('@orbit/core', [])
+      } catch (e) {
+        console.error('[orbit-resolver] circular dependency detected — stack overflow', e, {
+          component:   'DependencyResolver.resolveDependency',
+          package:     '@orbit/core',
+          userId:      _session.userId,
+          timestamp:   _now(),
+        })
+        log('log-error', 'JS RangeError — Maximum call stack exceeded (resolveDependency)')
+      }
+    }
+
+    function crash_asyncPipelineTrigger() {
+      function triggerPipelineRun(pipelineId) {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            reject(new Error('Runner pool exhausted — no available runners for pipeline ' + pipelineId))
+          }, 300)
+        })
+      }
+      function schedulePipelineBuild(pipelineId) {
+        const p = triggerPipelineRun(pipelineId)
+        p.catch(e => {
+          console.error('[orbit-ci] pipeline run failed — runner pool exhausted', e, {
+            pipelineId,
+            workspaceId: _session.workspaceId,
+            userId:      _session.userId,
+            timestamp:   _now(),
+          })
+          log('log-error', 'Unhandled Promise rejection — triggerPipelineRun: runner pool exhausted')
+        })
+      }
+      schedulePipelineBuild('pl_' + Math.floor(1000 + Math.random() * 9000))
+    }
+
+    function crash_websocketReconnect() {
+      function onWebSocketReconnect() {
+        function resubscribeToChannel() {
+          document.getElementById('ws-status-indicator').setAttribute('data-status', 'reconnecting')
+        }
+        resubscribeToChannel()
+      }
+      setTimeout(() => {
+        try {
+          onWebSocketReconnect()
+        } catch (e) {
+          console.error('[orbit-ws] WebSocket reconnect handler failed — DOM element missing', e, {
+            component:   'WebSocketManager.onWebSocketReconnect',
+            sessionId:   _session.sessionId,
+            userId:      _session.userId,
+            timestamp:   _now(),
+          })
+          log('log-error', 'JS TypeError — onWebSocketReconnect: ws-status-indicator is null')
+        }
+      }, 0)
+    }
+
+    function crash_parseWebhookPayload() {
+      function parseWebhookPayload(rawBody) {
+        return JSON.parse(rawBody)
+      }
+      function handleIncomingWebhook(rawBody) {
+        const payload = parseWebhookPayload(rawBody)
+        return payload.event
+      }
+      try {
+        handleIncomingWebhook('<html>503 Service Unavailable</html>')
+      } catch (e) {
+        console.error('[orbit-webhooks] webhook payload parse failed — server returned non-JSON', e, {
+          component:   'WebhookHandler.parseWebhookPayload',
+          hint:        'upstream service returned HTML error page instead of JSON',
+          workspaceId: _session.workspaceId,
+          userId:      _session.userId,
+          timestamp:   _now(),
+        })
+        log('log-error', 'JS SyntaxError — JSON.parse unexpected < in parseWebhookPayload')
+      }
+    }
+
+    function crash_deprecatedApi() {
+      console.warn('[orbit-sdk] deprecated method call — OrbitSDK.v1.track() removed in v2.0', {
+        currentMethod:     'OrbitSDK.v1.track()',
+        replacementMethod: 'OrbitSDK.events.emit()',
+        removalVersion:    '2.0.0',
+        calledFrom:        'AnalyticsModule.trackPageView',
+        userId:    _session.userId,
+        timestamp: _now(),
+      })
+      log('log-warn', 'console.warn — OrbitSDK.v1.track() deprecated (migrate to OrbitSDK.events.emit)')
+    }
+
+    function crash_serviceHealthTable() {
       const data = [
-        { endpoint: '/api/users',    status: 200, latency: '42ms' },
-        { endpoint: '/api/products', status: 404, latency: '18ms' },
-        { endpoint: '/api/orders',   status: 500, latency: '310ms' },
-        { endpoint: '/api/auth',     status: 401, latency: '9ms' },
+        { service: 'api-gateway',      status: 'healthy',   p50: '38ms',  p99: '210ms',  errorRate: '0.1%' },
+        { service: 'build-runner',      status: 'degraded',  p50: 'N/A',   p99: 'N/A',    errorRate: '12.4%' },
+        { service: 'container-registry',status: 'down',      p50: 'N/A',   p99: 'N/A',    errorRate: '100%' },
+        { service: 'metrics-ingestor',  status: 'healthy',   p50: '12ms',  p99: '88ms',   errorRate: '0.0%' },
+        { service: 'k8s-controller',    status: 'degraded',  p50: '920ms', p99: '>30000ms',errorRate: '8.7%' },
       ]
-      addLog('console.table', 'badge-js', 'Printed API health report — see Console for table')
-      console.log('[Console Lab] API Health Report:')
+      console.log('[orbit-monitoring] service health report — last 15 minutes')
       console.table(data)
+      log('log-info', 'console.table — service health report logged (see DevTools Console)')
     }
   </script>
 
